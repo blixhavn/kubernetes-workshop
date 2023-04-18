@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment # Name of the Deployment
+  labels:
+    app: sample-app # Labels to identify the Deployment
+spec:
+  replicas: 3 # Number of desired replicas (Pods) for this Deployment
+  selector:
+    matchLabels:
+      app: sample-app # Label selector to identify which Pods belong to this Deployment
+
+
+  strategy:
+    type: RollingUpdate # Update strategy type for the Deployment
+    rollingUpdate:
+      maxUnavailable: 1 # Maximum number of Pods that can be unavailable during the update
+      maxSurge: 1 # Maximum number of Pods that can be created over the desired number during the update
+
+
+  template: # Template for creating the Pods
+    metadata:
+      labels:
+        app: sample-app # Labels applied to the Pods created by this Deployment (must match line 9)
+    spec:
+      containers:
+      - name: sample-container # Name of the container in the Pod
+        image: sample-image:1.0 # Image and tag to be used for the container
+        ports:
+        - containerPort: 8080 # Port the container is listening on
+
+
+        resources: # Resource requests and limits for the container
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
+
+        env: # Environment variables for the container
+        - name: SAMPLE_ENV_VAR
+          value: "sample-value"
+
+
+        livenessProbe: # Liveness probe for the container
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30 # Number of seconds to wait before starting the liveness probe
+          periodSeconds: 10 # Interval between liveness probe checks
+        readinessProbe: # Readiness probe for the container
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10

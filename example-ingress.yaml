@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sample-ingress # Name of the Ingress
+  labels:
+    app: sample-app # Labels to identify the Ingress
+
+
+spec:
+  rules:
+  - host: example.com # Host/domain name for this Ingress rule (not required)
+    http:
+      paths:
+      - path: / # Path for the HTTP request
+        pathType: Prefix # Type of path matching (Exact, Prefix, or ImplementationSpecific)
+        backend:
+          service: # Reference to the Service to forward the traffic
+            name: sample-service # Name of the Service to route traffic to
+            port:
+              number: 80 # Port number on the Service to which traffic is forwarded
