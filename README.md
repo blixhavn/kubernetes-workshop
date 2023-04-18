@@ -65,8 +65,6 @@ As mentioned above, your goal is to deploy a web service. The image can be found
 ghcr.io/blixhavn/return-version:1.0.0
 ```
 
-The script loadtest.sh can be used for continuously polling a web address. Use this together with updating the image version in the Deployment and apply it to the cluster, and then look at how the new version starts responding.
-
 Use this to apply resources to the cluster:
 ```
 kubectl apply -f <filename.yaml>
