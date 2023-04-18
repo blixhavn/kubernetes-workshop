@@ -26,10 +26,10 @@ nodes:
         node-labels: "ingress-ready=true"
   extraPortMappings:
   - containerPort: 80
-    hostPort: 80
+    hostPort: 8000
     protocol: TCP
   - containerPort: 443
-    hostPort: 443
+    hostPort: 8443
     protocol: TCP
 EOF
 ```
@@ -72,3 +72,12 @@ Use this to apply resources to the cluster:
 kubectl apply -f <filename.yaml>
 ```
 
+Verify that everything is configured correctly by visiting `localhost:8000` in your browser and see that you get a response.
+
+### Scale
+
+Horizontally scale your deployment, then use the `./loadtest.sh localhost:8000` script to inspect how requests are routed to different replicas.
+
+### Rollout new version
+
+While running the loadtest in a terminal, change the deployment to use version 2.0.0 of the image and apply it. If you have enough replicas you might see that version 1 and version 2 are living side by side for a little period.
