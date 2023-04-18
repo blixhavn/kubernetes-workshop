@@ -3,7 +3,7 @@
 In this workshop, your task is to set up a local Kubernetes cluster, and then configure the resources needed to expose a web service.
 
 ## Prerequisites
-An UNIX-environment with Docker available
+An UNIX-environment/shell with Docker available (Git Bash seems to work)
 
 ### Kubectl and Kind
 Kubectl is the CLI used to communicate with Kubernetes API servers. Kind provides a simple way of running Kubernetes on your local machine.
