@@ -10,7 +10,7 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1 
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: workshop
